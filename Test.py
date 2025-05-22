@@ -45,8 +45,13 @@ while True:
         index_tip = hand_landmarks.landmark[8]
         h, w, _ = frame.shape
         ix, iy = int(index_tip.x * w), int(index_tip.y * h)
+
+        #Highlight middle fingertip
+        middle_tip = hand_landmarks.landmark[12]
+        mx, my = int(middle_tip.x * w), int(middle_tip.y * h)
         
         cv2.circle(frame, (ix, iy), 8, (0, 255, 0), cv2.FILLED)
+        cv2.circle(frame, (mx, my), 8, (0, 255, 0), cv2.FILLED)
 
     cv2.imshow("Hands + Pose Tracker", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
