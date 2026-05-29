@@ -1,0 +1,19 @@
+
+
+enum bmi2_intf {
+    BMI2_SPI_INTF = 0,
+    BMI2_I2C_INTF,
+    BMI2_I3C_INTF
+};
+
+struct bmi2_dev dev = {
+  .intf = BMI2_I2C_INTF,
+  .intf_ptr = &i2c_addr,
+  .read = bmi270_i2c_read,
+  .write = bmi270_i2c_write,
+  .delay_us = bmi270_delay_us
+};
+
+InitResult initBMI270(bmi2_dev& sensor) { 
+  bmi2_soft_reset(&dev)
+}

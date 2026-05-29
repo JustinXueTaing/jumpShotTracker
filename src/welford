@@ -1,0 +1,34 @@
+#include <Arduino.h>
+
+struct WelfordState{
+    int n = 0.0f;
+    float mean = 0.0f;
+    float M2 = 0.0f;
+
+} ;
+
+void restartWelford(struct WelfordState& state) {
+  state.n = 0;
+  state.mean = 0;
+  state.M2 = 0;
+}
+
+void WelfordCalc( struct WelfordState& state, int sample) {
+    state.n = state.n + 1;
+    float delta = sample - state.mean;
+    state.mean = state.mean + (delta / state.n);
+    float delta2 = sample - state.mean;
+    state.M2 = state.M2 + (delta * delta2);
+
+}
+
+// Return Variance, or -1 if insufficient samples (n <=1)
+float WelfordVariance(const WelfordState& state) {
+  if (state.n > 1) {
+    float variance = state.M2 / (state.n - 1);
+    return variance;
+  }
+  else {
+    return -1.0f;
+  }
+}
