@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <Wire.h>
-#include "bmi2_defs.h"
+
+extern "C" {
+  #include "bmi2_defs.h"
+}
 
 BMI2_INTF_RETURN_TYPE bmi270_i2c_read(uint8_t reg_addr, 
                                       uint8_t *reg_data, 

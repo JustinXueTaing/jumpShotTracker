@@ -1,6 +1,10 @@
 #pragma once
 #include <Arduino.h>
-#include "bmi270.h"
+
+extern "C" {
+    #include "bmi270.h"
+    #include "bmi2_defs.h"
+}
 
 enum class InitResult {
     SUCCESS,
