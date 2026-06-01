@@ -12,5 +12,9 @@ InitResult initBMI270(bmi2_dev& sensor) {
   if (bmi2_soft_reset(&sensor) != BMI2_OK) {
     return InitResult::SENSOR_NOT_DETECTED;
   }
+  if (bmi270_init(&sensor) != BMI2_OK) {
+      return InitResult::SENSOR_NOT_DETECTED;
+  }
+  sensor.delay_us(2000, sensor.intf_ptr);
   return InitResult::SUCCESS;
 }

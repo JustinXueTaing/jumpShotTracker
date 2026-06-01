@@ -26,6 +26,7 @@ void setup() {
       Serial.println("Initialization failed");  
         while(true) {}
     }
+    
 }
 
 void loop() {
