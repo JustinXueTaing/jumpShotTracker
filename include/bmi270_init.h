@@ -10,7 +10,14 @@ enum class InitResult {
     SUCCESS,
     SENSOR_NOT_DETECTED,
     REGISTER_VERIFY_FAIL,
-    FIFO_FAIL,
+    FIFO_FAIL
+};
+
+enum class ShotStages {
+    IDLE,
+    SHOT_POCKET,
+    RELEASE,
+    TRANSMIT
 };
 
 InitResult initBMI270(bmi2_dev& sensor);

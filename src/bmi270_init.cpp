@@ -51,5 +51,25 @@ InitResult initBMI270(bmi2_dev& sensor) {
   if (bmi2_set_fifo_wm(3000, &sensor) != BMI2_OK) {
     return InitResult::FIFO_FAIL;
   }
+
+  // Register Readback
+  struct bmi2_sens_config test[2];
+
+  test[0].type = BMI2_ACCEL;
+
+  test[1].type = BMI2_GYRO;
+  if (bmi270_get_sensor_config(test, 2, &sensor) != BMI2_OK) {
+    return InitResult::REGISTER_VERIFY_FAIL;
+  }
+  if (test[0].cfg.acc.odr != BMI2_ACC_ODR_800HZ) {
+    return InitResult::REGISTER_VERIFY_FAIL;
+  }
+  if (test[1].cfg.gyr.odr != BMI2_GYR_ODR_800HZ) {
+    return InitResult::REGISTER_VERIFY_FAIL;
+  }
+  if (test[1].cfg.gyr.range != BMI2_GYR_RANGE_1000) {
+    return InitResult::REGISTER_VERIFY_FAIL;
+  }
+
   return InitResult::SUCCESS;
 }

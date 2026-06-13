@@ -17,6 +17,17 @@ struct bmi2_dev dev = {
   .delay_us = bmi270_delay_us
 };
 
+enum class ShotStages {
+    IDLE,
+    SHOT_POCKET,
+    RELEASE,
+    TRANSMIT
+};
+
+ShotStages currentStage = ShotStages::IDLE;
+
+
+
 void setup() {
   Serial.begin(115200);
   delay(100);
@@ -30,5 +41,22 @@ void setup() {
 }
 
 void loop() {
+  switch (currentStage)
+  {
+  case ShotStages::SHOT_POCKET:
+    
+    break;
+  case ShotStages::RELEASE:
+    break;
+
+  case ShotStages::TRANSMIT:
+    break;
+  
+  case ShotStages::IDLE:
+    break;
+
+  default:
+    break;
+  }
   // put your main code here, to run repeatedly:
 }
